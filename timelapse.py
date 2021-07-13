@@ -24,6 +24,7 @@ print("RPi started taking photos for your timelapse at:", datetime_format)
 
 camera = PiCamera()
 camera.resolution = (config['camResX'], config['camResY'])
+camera.rotation = config['camRotation']
 
 system('mkdir ' + dir_name)
 
