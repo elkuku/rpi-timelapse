@@ -48,6 +48,7 @@ const requestListener = async function (req, res) {
             break
 
         case '/preview':
+            fsy.mkdirSync('public/previews')
             const filename = 'public/previews/preview-' + Math.round(+new Date() / 1000) + '.jpg'
             console.log('starting preview: ' + filename)
 
@@ -73,6 +74,7 @@ const requestListener = async function (req, res) {
             break
 
         case '/start':
+            fsy.mkdirSync('public/timelapses')
             const basePath = 'public/timelapses/' + formatDate()
             fsy.mkdirSync(basePath)
             console.log(basePath)
