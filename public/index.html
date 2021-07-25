@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KuKuKam!</title>
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico"/>
+    <link rel="stylesheet" href="/../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/assets/styles/styles.css">
+    <script src="public/assets/js/script.js" async>alert('hey')</script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <h1>KuKuKam!</h1>
+
+    <button id="btnPreview" class="btn btn-success">Preview</button>
+    <img src="" id="preview" class="img-fluid" alt="preview"/>
+
+
+    <h4>Settings</h4>
+
+    <form id="settings">
+        <div class="row">
+            <div class="col-4">
+                Runtime (min):
+            </div>
+            <div class="col">
+                <input class="form-field" id="runtime" type="number"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                Interval (sec.):
+            </div>
+            <div class="col">
+                <input class="form-field" id="interval" type="number"/>
+            </div>
+        </div>
+
+    </form>
+
+    <button id="start" class="btn btn-success">Start</button>
+
+    <div id="resultMessage">...</div>
+    <div id="status" class="alert">...</div>
+
+</div>
+</body>
+
+</html> 

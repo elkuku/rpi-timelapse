@@ -1,2 +1,4 @@
-/venv
-/config.json
+/node_modules
+status.json
+/public/previews/*
+/public/timelapses/*

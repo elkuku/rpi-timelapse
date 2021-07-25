@@ -1,0 +1,16 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "elkuku",
+  "license": "WTFPL",
+  "dependencies": {
+    "bootstrap": "^5.0.2",
+    "pi-camera": "^1.6.0"
+  }
+}
