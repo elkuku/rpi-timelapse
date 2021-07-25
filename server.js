@@ -124,13 +124,11 @@ const requestListener = async function (req, res) {
             console.log('Finished!')
 
             saveStatus('finished', 'Finished!')
-
             break
 
         case '/status':
             fs.readFile(__dirname + "/status.json")
                 .then(contents => {
-                    //console.log(contents)
                     res.setHeader("Content-Type", "application/json");
                     res.writeHead(200);
                     res.end(contents);

@@ -28,28 +28,27 @@ function startIt() {
         console.log(data.message);
         document.getElementById("resultMessage").innerHTML = data.message;
         requestLoop = setInterval(function () {
-            console.log('hey' + baseURI)
-
-            fetch(baseURI + '/status').then(function (response) {
-                console.log(response)
-                return response.json();
-            }).then(function (data) {
-                console.log(data);
-                console.log(data.message);
-                const statusElement = document.getElementById("status")
-                statusElement.innerHTML = data.message
-                statusElement.classList.add('alert-warning')
-                if (data.status === 'finished') {
-                    clearInterval(requestLoop)
-                    statusElement.classList.remove('alert-warning')
-                    statusElement.classList.add('alert-success')
-                }
-            }).catch(function () {
-                console.log("Booo");
+            fetch(baseURI + '/status')
+                .then(function (response) {
+                    console.log(response)
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+                    console.log(data.message);
+                    const statusElement = document.getElementById("status")
+                    statusElement.innerHTML = data.message
+                    statusElement.classList.add('alert-warning')
+                    if (data.status === 'finished') {
+                        clearInterval(requestLoop)
+                        statusElement.classList.remove('alert-warning')
+                        statusElement.classList.add('alert-success')
+                    }
+                }).catch(function (e) {
+                console.log(e)
             });
         }, 2000);
     }).catch(function (e) {
-        console.log("Booo");
         console.log(e)
     });
 }
