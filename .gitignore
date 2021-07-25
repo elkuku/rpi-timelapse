@@ -1,4 +1,7 @@
 /node_modules
 status.json
 /public/previews/*
+!/public/previews/.gitignore
+
 /public/timelapses/*
+!/public/timelapses/.gitignore
