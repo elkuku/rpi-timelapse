@@ -39,10 +39,18 @@ function startIt() {
                     const statusElement = document.getElementById("status")
                     statusElement.innerHTML = data.message
                     statusElement.classList.add('alert-warning')
+                    if (data.fileName) {
+                        document.getElementById("preview").src = data.fileName
+                    }
+                    if (data.status === 'sleeping') {
+                        clearInterval(requestLoop);
+                        statusElement.classList.remove('alert-warning');
+                        statusElement.classList.add('alert-info');
+                    }
                     if (data.status === 'finished') {
-                        clearInterval(requestLoop)
-                        statusElement.classList.remove('alert-warning')
-                        statusElement.classList.add('alert-success')
+                        clearInterval(requestLoop);
+                        statusElement.classList.remove('alert-warning');
+                        statusElement.classList.add('alert-success');
                     }
                 }).catch(function (e) {
                 console.log(e)

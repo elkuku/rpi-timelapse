@@ -20,10 +20,11 @@ function formatDate() {
         + ':' + date.getMinutes()
 }
 
-function saveStatus(status, message) {
+function saveStatus(status, message, fileName) {
     let s = {
         status: status,
-        message: message
+        message: message,
+        fileName: fileName
     }
 
     console.log(JSON.stringify(s))
@@ -48,7 +49,10 @@ const requestListener = async function (req, res) {
             break
 
         case '/preview':
-            fsy.mkdirSync('public/previews')
+            if (!fsy.existsSync('public/previews')) {
+                fsy.mkdirSync('public/previews')
+            }
+
             const filename = 'public/previews/preview-' + Math.round(+new Date() / 1000) + '.jpg'
             console.log('starting preview: ' + filename)
 
@@ -74,7 +78,10 @@ const requestListener = async function (req, res) {
             break
 
         case '/start':
-            fsy.mkdirSync('public/timelapses')
+            if (!fsy.existsSync('public/timelapses')) {
+                fsy.mkdirSync('public/timelapses')
+            }
+
             const basePath = 'public/timelapses/' + formatDate()
             fsy.mkdirSync(basePath)
             console.log(basePath)
@@ -99,28 +106,29 @@ const requestListener = async function (req, res) {
             res.end(`{"message": "Starting timelapse with numpics: ` + numPics + `"}`);
 
             for (let i = 1; i <= numPics; i++) {
-
                 console.log('Taking picture: ' + i)
                 let fileName = 'image-' + (i).toString().padStart(4, '0') + '.jpg'
-                console.log(fileName)
 
                 saveStatus('running', 'Taking picture: ' + i + '/' + numPics)
 
                 new PiCamera({
                     mode: 'photo',
                     output: basePath + '/' + fileName,
-                    width: 640,
-                    height: 480,
+                    width: 1280,
+                    height: 720,
                     nopreview: true,
                 }).snap()
                     .then((result) => {
                         console.log('finished capture')
+                        saveStatus('running', 'Took picture: ' + i + '/' + numPics, fileName)
                     })
                     .catch((error) => {
                         console.log(error)
                     })
-
-                await sleep(params['interval'])
+                if (i <= numPics) {
+                    saveStatus('sleeping', 'Sleeping for ' + params['interval'] + ' seconds...')
+                    await sleep(params['interval']);
+                }
             }
 
             console.log('Finished!')
@@ -139,7 +147,6 @@ const requestListener = async function (req, res) {
                     res.writeHead(500);
                     res.end(err);
                 });
-
             break
 
         default:
