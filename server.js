@@ -62,7 +62,7 @@ const requestListener = async function (req, res) {
                 width: 640,
                 height: 480,
                 nopreview: true,
-                rotation: 90,
+                rotation: 180,
             });
 
             myCamera.snap()
