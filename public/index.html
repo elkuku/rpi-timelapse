@@ -22,22 +22,40 @@
 
     <h4>Settings</h4>
 
-        <div class="row">
-            <div class="col-10">
-                <label for="runtime">Runtime (min):</label>
-            </div>
-            <div class="col">
-                <input class="form-control" id="runtime" type="number"/>
+    <div class="row">
+        <div class="col-7">
+            <label for="rotation">Rotation:</label>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <input class="form-control" id="rotation" type="number"/>
+                <span class="input-group-text">@</span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-10">
-                <label for="interval">Interval (sec.):</label>
-            </div>
-            <div class="col">
-                <input class="form-control" id="interval" type="number"/>
+    </div>
+    <div class="row">
+
+        <div class="col-7">
+            <label for="runtime">Runtime:</label>
+        </div>
+        <div class="col">
+            <div class="input-group">
+            <input class="form-control" id="runtime" type="number"/>
+            <span class="input-group-text">min.</span>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <label for="interval">Interval:</label>
+        </div>
+        <div class="col">
+            <div class="input-group">
+            <input class="form-control" id="interval" type="number"/>
+                <span class="input-group-text">sec.</span>
+            </div>
+        </div>
+    </div>
 
     <button id="start" class="btn btn-success">Start</button>
 

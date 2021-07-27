@@ -3,7 +3,7 @@ const baseURI = 'http://192.168.4.1:8000'
 
 function preview() {
     document.getElementById("preview").src = ''
-    const url = baseURI + '/preview'
+    const url = baseURI + '/preview?runtime=' + document.getElementById("runtime").value
     fetch(url).then(function (response) {
         console.log(response)
         return response.json();
@@ -17,9 +17,10 @@ function preview() {
 }
 
 function startIt() {
-    const url = baseURI + '/start?'
-        + 'runtime=' + document.getElementById("runtime").value
+    const url = baseURI + '/start'
+        + '?runtime=' + document.getElementById("runtime").value
         + '&interval=' + document.getElementById("interval").value
+        + '&rotation=' + document.getElementById("rotation").value
     fetch(url).then(function (response) {
         console.log(response)
         return response.json();

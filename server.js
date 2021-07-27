@@ -31,9 +31,23 @@ function saveStatus(status, message, fileName) {
     fsy.writeFileSync(__dirname + '/status.json', JSON.stringify(s))
 }
 
+function parseParams(paramString){
+    const paramArray = paramString.split('&')
+    let params = []
+    console.log(paramArray)
+    let param;
+    for (param of paramArray) {
+        const p = param.split('=')
+        params[p[0]] = p[1]
+    }
+
+    return params
+}
+
 const requestListener = async function (req, res) {
     console.log('received: ' + req.url)
     const arr = req.url.split('?')
+    let params
     switch (arr[0]) {
         case '/':
             fs.readFile(__dirname + "/public/index.html")
@@ -53,6 +67,8 @@ const requestListener = async function (req, res) {
                 fsy.mkdirSync('public/previews')
             }
 
+            params = parseParams(arr[1])
+
             const filename = 'public/previews/preview-' + Math.round(+new Date() / 1000) + '.jpg'
             console.log('starting preview: ' + filename)
 
@@ -62,7 +78,7 @@ const requestListener = async function (req, res) {
                 width: 640,
                 height: 480,
                 nopreview: true,
-                rotation: 180,
+                rotation: params['rotation'],
             });
 
             myCamera.snap()
@@ -86,14 +102,8 @@ const requestListener = async function (req, res) {
             const basePath = 'public/timelapses/' + formatDate()
             fsy.mkdirSync(basePath)
             console.log(basePath)
-            const paramArray = arr[1].split('&')
-            let params = []
-            console.log(paramArray)
-            let param;
-            for (param of paramArray) {
-                const p = param.split('=')
-                params[p[0]] = p[1]
-            }
+
+            params = parseParams(arr[1])
 
             console.log(params)
             const numPics = parseInt((params['runtime'] * 60) / params['interval'])
@@ -118,6 +128,7 @@ const requestListener = async function (req, res) {
                     width: 1280,
                     height: 720,
                     nopreview: true,
+                    rotation: params['rotation'],
                 }).snap()
                     .then((result) => {
                         console.log('finished capture')
