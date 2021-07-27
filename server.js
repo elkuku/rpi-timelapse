@@ -126,7 +126,7 @@ const requestListener = async function (req, res) {
                         console.log(error)
                     })
                 if (i <= numPics) {
-                    saveStatus('sleeping', 'Sleeping for ' + params['interval'] + ' seconds...')
+                    //saveStatus('sleeping', 'Sleeping for ' + params['interval'] + ' seconds...')
                     await sleep(params['interval']);
                 }
             }
