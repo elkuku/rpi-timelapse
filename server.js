@@ -62,6 +62,7 @@ const requestListener = async function (req, res) {
                 width: 640,
                 height: 480,
                 nopreview: true,
+                rotation: 90,
             });
 
             myCamera.snap()
@@ -126,6 +127,7 @@ const requestListener = async function (req, res) {
                         console.log(error)
                     })
                 if (i <= numPics) {
+                    console.log('sleeping...')
                     //saveStatus('sleeping', 'Sleeping for ' + params['interval'] + ' seconds...')
                     await sleep(params['interval']);
                 }
