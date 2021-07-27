@@ -26,7 +26,7 @@ function startIt() {
     }).then(function (data) {
         console.log(data);
         console.log(data.message);
-        document.getElementById("resultMessage").innerHTML = data.message;
+        // document.getElementById("resultMessage").innerHTML = data.message;
         requestLoop = setInterval(function () {
             fetch(baseURI + '/status')
                 .then(function (response) {
@@ -49,6 +49,7 @@ function startIt() {
                     if (data.status === 'finished') {
                         clearInterval(requestLoop);
                         statusElement.classList.remove('alert-warning');
+                        statusElement.classList.remove('alert-info');
                         statusElement.classList.add('alert-success');
                     }
                 }).catch(function (e) {

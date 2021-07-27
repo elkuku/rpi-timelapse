@@ -14,8 +14,11 @@
 <div class="container-fluid">
     <h1>KuKuKam!</h1>
 
-    <button id="btnPreview" class="btn btn-success">Preview</button>
     <img src="" id="preview" class="img-fluid" alt="preview"/>
+    <br>
+    <button id="btnPreview" class="btn btn-success">Preview</button>
+    <div id="resultMessage"></div>
+    <div id="status" class="alert">...</div>
 
     <h4>Settings</h4>
 
@@ -24,7 +27,7 @@
             <div class="col-4">
                 Runtime (min):
             </div>
-            <div class="col">
+            <div class="col-1">
                 <input class="form-field" id="runtime" type="number"/>
             </div>
         </div>
@@ -32,7 +35,7 @@
             <div class="col-4">
                 Interval (sec.):
             </div>
-            <div class="col">
+            <div class="col-1">
                 <input class="form-field" id="interval" type="number"/>
             </div>
         </div>
@@ -41,8 +44,6 @@
 
     <button id="start" class="btn btn-success">Start</button>
 
-    <div id="resultMessage">...</div>
-    <div id="status" class="alert">...</div>
 
 </div>
 </body>
