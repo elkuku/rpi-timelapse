@@ -3,7 +3,7 @@ const baseURI = 'http://192.168.4.1:8000'
 
 function preview() {
     document.getElementById("preview").src = ''
-    const url = baseURI + '/preview?runtime=' + document.getElementById("runtime").value
+    const url = baseURI + '/preview?rotation=' + document.getElementById("rotation").value
     fetch(url).then(function (response) {
         console.log(response)
         return response.json();
