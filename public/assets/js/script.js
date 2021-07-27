@@ -42,8 +42,7 @@ function startIt() {
                     if (data.fileName) {
                         document.getElementById("preview").src = data.fileName
                     }
-                    if (data.status === 'sleeping') {
-                        clearInterval(requestLoop);
+                    if (data.status === 'idle') {
                         statusElement.classList.remove('alert-warning');
                         statusElement.classList.add('alert-info');
                     }

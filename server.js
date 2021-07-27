@@ -120,7 +120,7 @@ const requestListener = async function (req, res) {
                 }).snap()
                     .then((result) => {
                         console.log('finished capture')
-                        saveStatus('running', 'Took picture: ' + i + '/' + numPics, fileName)
+                        saveStatus('idle', 'Took picture: ' + i + '/' + numPics, basePath + '/' + fileName)
                     })
                     .catch((error) => {
                         console.log(error)
