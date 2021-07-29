@@ -11,16 +11,16 @@ function preview() {
         console.log(data);
         console.log(data.message);
         document.getElementById("preview").src = data.message
-    }).catch(function () {
-        console.log("Booo");
+    }).catch(function (e) {
+        console.log('Booo', e);
     });
 }
 
 function startIt() {
     const url = baseURI + '/start'
-        + '?runtime=' + document.getElementById("runtime").value
-        + '&interval=' + document.getElementById("interval").value
-        + '&rotation=' + document.getElementById("rotation").value
+        + '?runtime=' + document.getElementById('runtime').value
+        + '&interval=' + document.getElementById('interval').value
+        + '&rotation=' + document.getElementById('rotation').value
     fetch(url).then(function (response) {
         console.log(response)
         return response.json();
@@ -53,12 +53,16 @@ function startIt() {
                         statusElement.classList.remove('alert-info');
                         statusElement.classList.add('alert-success');
                     }
+                    if (data.error) {
+
+                    }
                 }).catch(function (e) {
                 console.log(e)
             });
         }, 2000);
     }).catch(function (e) {
         console.log(e)
+        document.getElementById("resultMessage").innerHTML = e
     });
 }
 

@@ -31,7 +31,7 @@ function saveStatus(status, message, fileName) {
     fsy.writeFileSync(__dirname + '/status.json', JSON.stringify(s))
 }
 
-function parseParams(paramString){
+function parseParams(paramString) {
     const paramArray = paramString.split('&')
     let params = []
     console.log(paramArray)
@@ -63,10 +63,6 @@ const requestListener = async function (req, res) {
             break
 
         case '/preview':
-            if (!fsy.existsSync('public/previews')) {
-                fsy.mkdirSync('public/previews')
-            }
-
             params = parseParams(arr[1])
 
             const filename = 'public/previews/preview-' + Math.round(+new Date() / 1000) + '.jpg'
@@ -95,20 +91,12 @@ const requestListener = async function (req, res) {
             break
 
         case '/start':
-            if (!fsy.existsSync('public/timelapses')) {
-                fsy.mkdirSync('public/timelapses')
-            }
-
             const basePath = 'public/timelapses/' + formatDate()
             fsy.mkdirSync(basePath)
-            console.log(basePath)
 
             params = parseParams(arr[1])
 
-            console.log(params)
             const numPics = parseInt((params['runtime'] * 60) / params['interval'])
-
-            console.log(numPics)
 
             console.log('starting timelapse: ', params, numPics)
 
@@ -136,6 +124,7 @@ const requestListener = async function (req, res) {
                     })
                     .catch((error) => {
                         console.log(error)
+                        saveStatus('error', error)
                     })
                 if (i <= numPics) {
                     console.log('sleeping...')
@@ -167,7 +156,21 @@ const requestListener = async function (req, res) {
             if (fsy.existsSync(path)) {
                 fs.readFile(path)
                     .then(contents => {
-                        //res.setHeader("Content-Type", "text/html");
+                        const extension = path.split('.').pop()
+                        console.log(extension)
+
+                        switch (extension) {
+                            case 'css':
+                                res.setHeader("Content-Type", "text/css");
+                                break
+                            case 'js':
+                                res.setHeader("Content-Type", "text/javascript");
+                                break
+
+                            default:
+                            // res.setHeader("Content-Type", "text/html");
+
+                        }
                         res.writeHead(200);
                         res.end(contents);
                     })
