@@ -92,7 +92,8 @@ const requestListener = async function (req, res) {
 
         case '/start':
             const basePath = 'public/timelapses/' + formatDate()
-            fsy.mkdirSync(__dirname + '/' + basePath)
+            const fullPath = __dirname + basePath
+            fsy.mkdirSync(fullPath)
 
             params = parseParams(arr[1])
 
@@ -112,7 +113,7 @@ const requestListener = async function (req, res) {
 
                 new PiCamera({
                     mode: 'photo',
-                    output: basePath + '/' + fileName,
+                    output: fullPath + '/' + fileName,
                     width: 1280,
                     height: 720,
                     nopreview: true,
