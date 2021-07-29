@@ -157,8 +157,6 @@ const requestListener = async function (req, res) {
                 fs.readFile(path)
                     .then(contents => {
                         const extension = path.split('.').pop()
-                        console.log(extension)
-
                         switch (extension) {
                             case 'css':
                                 res.setHeader("Content-Type", "text/css");
@@ -166,10 +164,14 @@ const requestListener = async function (req, res) {
                             case 'js':
                                 res.setHeader("Content-Type", "text/javascript");
                                 break
-
+                            case 'jpg':
+                                res.setHeader("Content-Type", "image/jpeg");
+                                break
+                            case 'ico':
+                                res.setHeader("Content-Type", "image/x-icon");
+                                break
                             default:
                             // res.setHeader("Content-Type", "text/html");
-
                         }
                         res.writeHead(200);
                         res.end(contents);
