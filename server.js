@@ -91,7 +91,7 @@ const requestListener = async function (req, res) {
             break
 
         case '/start':
-            const basePath = 'public/timelapses/' + formatDate()
+            const basePath = __dirname + '/public/timelapses/' + formatDate()
             fsy.mkdirSync(basePath)
 
             params = parseParams(arr[1])
